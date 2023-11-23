@@ -32,7 +32,7 @@ document.addEventListener("click", (e) =>{
         setTimeout(() =>{
             document.querySelector("div.active").classList.remove("active","fade-out");
             document.querySelector(e.target.hash).classList.add("active");
-            window.scrollTo(0,0);
+            //window.scrollTo(0,0);
             document.body.classList.remove("hide-scrolling");
             navToggler.classList.remove("hide");
             document.querySelector(".overlay").classList.remove("active");
