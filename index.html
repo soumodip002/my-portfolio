@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="font-awsome.css">
     <link rel="stylesheet" href="style.css">
     <link rel="website icon" type="png" href="logo.png">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -175,20 +176,19 @@
                 </div>
                 <div class="row">
                     <div class="contact-form">
-                        <form>
+                        <form id="myForm">
                             <div class="row">
                                 <div class="input-group">
-                                    <input type="text" placeholder="Name" class="input-control" required>
+                                    <input type="text" placeholder="Name" class="input-control" id="name" name="name" required>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" placeholder="Email" class="input-control" required>
+                                    <input type="text" placeholder="Email" class="input-control" id="email" name="email" required>
                                 </div>
                                 <div class="input-group">
-                                    <textarea placeholder="message" class="input-control" required></textarea>
+                                    <textarea placeholder="message" class="input-control" id="message" name="message" required></textarea>
                                 </div>
                                 <div class="submit-btn">
-                                    <button type="submit" class="btn
-                                    ">send message</button>
+                                    <button type="submit" name="submit" class="btn">send message</button>
                                 </div>
                             </div>
                         </form>
@@ -260,5 +260,30 @@
     </div>
     <!-- portfolio item details popup end -->
     <script src="script.js"></script>
+    <script>
+        document.querySelector("#myForm").addEventListener("submit",sendMail);
+        function sendMail(event){
+
+            (function () {
+                emailjs.init("C64ZwzITwnoduGvBi");
+            })();
+
+            event.preventDefault();
+            var name=document.querySelector("#name").value;
+            var email=document.querySelector("#email").value;
+            var message=document.querySelector("#message").value;
+            document.querySelector("#myForm").reset();
+
+            var contactParams = {
+                from_name: name,
+                email: email,
+                message: message
+            };
+
+            emailjs.send('service_zpy3yeq', 'template_6wb48ye', contactParams).then(function (res) {})
+
+            //console.log(name, email, message)
+        }
+       </script>
 </body>
 </html>
